@@ -9,29 +9,37 @@ module SuperModel
       end
       
       class_eval(<<-EOS, __FILE__, __LINE__ + 1)
-        def create
+        def create_with_callbacks(*args, &block)
           run_callbacks :create do
             # Your create action methods here
+            create_without_callbacks(*args, &block)
           end
         end
+        alias_method_chain(:create, :callbacks)
 
-        def save
+        def save_with_callbacks(*args, &block)
           run_callbacks :save do
-            # Your create action methods here
+            # Your save action methods here
+            save_without_callbacks(*args, &block)
           end
         end
+        alias_method_chain(:save, :callbacks)
 
-        def update
+        def update_with_callbacks(*args, &block)
           run_callbacks :update do
-            # Your create action methods here
+            # Your update action methods here
+            update_without_callbacks(*args, &block)
           end
         end
+        alias_method_chain(:update, :callbacks)
 
-        def destroy
+        def destroy_with_callbacks(*args, &block)
           run_callbacks :destroy do
-            # Your create action methods here
+            # Your destroy action methods here
+            destroy_without_callbacks(*args, &block)
           end
         end
+        alias_method_chain(:destroy, :callbacks)
       EOS
       
     end
