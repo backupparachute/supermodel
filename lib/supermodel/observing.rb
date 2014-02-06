@@ -2,7 +2,7 @@ module SuperModel
   module Observing
     extend ActiveSupport::Concern
     include ActiveModel::Observing
-
+    
     included do
       %w( create save update destroy ).each do |method|
         class_eval(<<-EOS, __FILE__, __LINE__ + 1)

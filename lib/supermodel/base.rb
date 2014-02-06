@@ -321,6 +321,8 @@ module SuperModel
     include ActiveModel::Serializers::JSON
     include ActiveModel::Serializers::Xml
     include Dirty, Observing, Callbacks, Validations
+    # Callbacks needs to be refactored for Rails4!!!
+    # include Dirty, Observing, Validations
     include Association::Model
   end
 end
