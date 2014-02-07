@@ -8,6 +8,9 @@ module SuperModel
                     
           class_attribute :redis_options
           self.redis_options = {}
+          
+          class_attribute :redis_connection
+          self.redis_connection = nil
         end
       end
       
@@ -20,7 +23,11 @@ module SuperModel
       end
       
       def redis
-        @redis ||= ::Redis.connect(redis_options)
+        @redis ||= (!redis_connection.nil? ? redis_connection : ::Redis.connect(redis_options))
+      end
+
+      def redis=(redis_connection)
+        @redis = redis_connection
       end
       
       def indexes(*indexes)
