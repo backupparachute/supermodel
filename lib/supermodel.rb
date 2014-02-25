@@ -26,7 +26,6 @@ require "supermodel/ext/array"
 module SuperModel
   autoload :Association, "supermodel/association"
   autoload :Callbacks,   "supermodel/callbacks"
-  autoload :Observing,   "supermodel/observing"
   autoload :Marshal,     "supermodel/marshal"
   autoload :RandomID,    "supermodel/random_id"
   autoload :Timestamp,   "supermodel/timestamp"
