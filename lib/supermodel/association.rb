@@ -40,6 +40,21 @@ module SuperModel
           end                                                         # end
         EOS
       end
+
+      def has_one(to_model, options = {})
+        to_model    = to_model.to_s
+        class_name  = options[:class_name]  || to_model.classify
+        foreign_key = options[:foreign_key] || "#{model_name.singular}_id"
+        primary_key = options[:primary_key] || "id"
+        class_eval(<<-EOS, __FILE__, __LINE__ + 1)
+          def #{to_model}                                             # def user
+            #{class_name}.find_by_attribute(                      #   User.find_all_by_attribute(
+              :#{foreign_key},                                        #    :task_id,
+              #{primary_key}                                          #    id
+            )                                                         #   )
+          end                                                         # end
+        EOS
+      end
     end
     
     module Model
