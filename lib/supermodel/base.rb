@@ -35,7 +35,7 @@ module SuperModel
       end
       
       def raw_find(id) #:nodoc:
-        records[id] || raise(UnknownRecord, "Couldn't find #{self.name} with ID=#{id}")
+        records[id.to_i] || raise(UnknownRecord, "Couldn't find #{self.name} with ID=#{id}")
       end
       
       # Find record by ID, or raise.
@@ -224,12 +224,12 @@ module SuperModel
       self.save
     end
     
-    def update_attributes(attributes)
+    def update(attributes)
       load(attributes) && save
     end
     
-    def update_attributes!(attributes)
-      update_attributes(attributes) || raise(InvalidRecord)
+    def update!(attributes)
+      update(attributes) || raise(InvalidRecord)
     end
     
     def has_attribute?(name)
