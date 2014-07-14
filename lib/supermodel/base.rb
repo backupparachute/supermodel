@@ -85,7 +85,7 @@ module SuperModel
       end
       
       def update(id, atts)
-        find(id).update_attributes(atts)
+        find(id).update(atts)
       end
       
       def destroy(id)
@@ -193,7 +193,7 @@ module SuperModel
     end
     
     def save
-      new? ? create : update
+      new? ? create : update_attributes
     end
     
     def save!
@@ -289,7 +289,7 @@ module SuperModel
         item.load(attributes)
       end
       
-      def update
+      def update_attributes
         raw_update
         true
       end
